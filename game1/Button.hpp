@@ -24,10 +24,11 @@ class Button {
   void update(sf::Vector2f mousePos);
   void render(sf::RenderTarget& window);
 
-  enum button_states{
-    BTN_IDLE,
-    BTN_HOVER,
-    BTN_PRESSED
+  enum button_states
+  {
+	BTN_IDLE,
+	BTN_HOVER,
+	BTN_PRESSED
   };
 
  private:

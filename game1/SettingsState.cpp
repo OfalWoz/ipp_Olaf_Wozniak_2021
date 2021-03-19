@@ -2,17 +2,18 @@
 
 Settings::Settings(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states) {
   initButtons();
-  if (!backText.loadFromFile("textures/back2.png")) {
+  if (!backText.loadFromFile("textures/back2.png")) 
+  {
 	  std::cout << "ERROR::LOADING BACKGROUND TEXTURES\n";
   }
-  sf::Vector2f back = (sf::Vector2f)backText.getSize();
-  background.setScale(sf::Vector2f(window.getSize().x / back.x, window.getSize().y / back.y));
-  background.setTexture(backText);
+	sf::Vector2f back = (sf::Vector2f)backText.getSize();
+	background.setScale(sf::Vector2f(window.getSize().x / back.x, window.getSize().y / back.y));
+	background.setTexture(backText);
 
-  logo.setFont(font);
-  logo.setString("Settings");
-  logo.setCharacterSize(50);
-  logo.setPosition((window.getSize().x / 2) - 150, 20);
+	logo.setFont(font);
+	logo.setString("Settings");
+	logo.setCharacterSize(50);
+	logo.setPosition((window.getSize().x / 2) - 150, 20);
 }
 
 Settings::~Settings() {
@@ -23,12 +24,12 @@ Settings::~Settings() {
 }
 
 void Settings::initButtons() {
-  font.loadFromFile("fonts/arial.ttf");
-  std::ifstream ifs("config/window.ini");
-  std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
-  std::string title = "Game1";
-  sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
-  bool fullscreen = false;
+	font.loadFromFile("fonts/arial.ttf");
+	std::ifstream ifs("config/window.ini");
+	std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
+	std::string title = "Game1";
+	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
+	bool fullscreen = false;
   if (ifs.is_open()) {
 	  std::getline(ifs, title);
 	  ifs >> window_bounds.width >> window_bounds.height;
@@ -56,9 +57,9 @@ void Settings::initButtons() {
 }
 
 void Settings::updateMousePosition() {
-  mousePosScreen = sf::Mouse::getPosition();
-  mousePosWindow = sf::Mouse::getPosition(window);
-  mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+	mousePosScreen = sf::Mouse::getPosition();
+	mousePosWindow = sf::Mouse::getPosition(window);
+	mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 }
 
 void Settings::updateButtons() {
@@ -68,23 +69,23 @@ void Settings::updateButtons() {
 }
 
 void Settings::update(const sf::Time dt) {
-  updateMousePosition();
-  updateButtons();
-  std::ifstream ifs("config/window.ini");
-  std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
-  std::string title = "Game1";
-  sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
-  bool fullscreen = false;
-  unsigned int framerate_limit = 120;
-  bool vertival_sync_enabled = false;
-  unsigned antialiasing_level = 0;
+	updateMousePosition();
+	updateButtons();
+	std::ifstream ifs("config/window.ini");
+	std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
+	std::string title = "Game1";
+	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
+	bool fullscreen = false;
+	unsigned int framerate_limit = 120;
+	bool vertival_sync_enabled = false;
+	unsigned antialiasing_level = 0;
   if (ifs.is_open()) {
-	  std::getline(ifs, title);
-	  ifs >> window_bounds.width >> window_bounds.height;
-	  ifs >> fullscreen;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
-	  ifs >> framerate_limit;
-	  ifs >> vertival_sync_enabled;
-	  ifs >> antialiasing_level;
+	std::getline(ifs, title);
+	ifs >> window_bounds.width >> window_bounds.height;
+	ifs >> fullscreen;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
+	ifs >> framerate_limit;
+	ifs >> vertival_sync_enabled;
+	ifs >> antialiasing_level;
   }
   ifs.close();
 

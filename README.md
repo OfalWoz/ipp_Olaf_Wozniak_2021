@@ -10,6 +10,10 @@ W grze będzie menu główne, proste ustawienia graficzne. Będzie także możli
 Gra będzie napisana w języku C++ wykorzystując bibliotekę SFML. Do jej stworzenia używam mojego autorskiego silnika opartego właśnie na SFML.
 Do pisania używam środowiska Visual Studio 2019, czuję w nim dosyć swobodnie i według mnie (na windowsie) najławtiej pracuję się w nim z SFML.
 
+##Wygląd
+Pod tym linkiem można zobaczyć jak będzie mniej więcej wyglądać rozgrywka
+http://panoramx.ift.uni.wroc.pl/~owozniak/lista9/zadanie2.html
+
 ## Zadanie 1.1 (23.03)
 - Prosta rozgrywka
 - Działające menu
