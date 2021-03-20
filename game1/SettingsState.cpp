@@ -2,7 +2,7 @@
 
 Settings::Settings(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states) {
   initButtons();
-  if (!backText.loadFromFile("textures/back2.png")) 
+  if (!backText.loadFromFile("textures/back.png")) 
   {
 	  std::cout << "ERROR::LOADING BACKGROUND TEXTURES\n";
   }
@@ -13,10 +13,11 @@ Settings::Settings(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>&
 	logo.setFont(font);
 	logo.setString("Settings");
 	logo.setCharacterSize(50);
-	logo.setPosition((window.getSize().x / 2) - 150, 20);
+	logo.setPosition((window.getSize().x / 2) - 100, 20);
 }
 
-Settings::~Settings() {
+Settings::~Settings() 
+{
   auto it = buttons.begin();
   for (it = buttons.begin(); it != buttons.end(); ++it) {
 	delete it->second;
@@ -24,7 +25,7 @@ Settings::~Settings() {
 }
 
 void Settings::initButtons() {
-	font.loadFromFile("fonts/arial.ttf");
+	font.loadFromFile("fonts/RoguedashSolid-BWjqx.otf");
 	std::ifstream ifs("config/window.ini");
 	std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
 	std::string title = "Game1";
@@ -45,13 +46,13 @@ void Settings::initButtons() {
 	  buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Full Screen", sf::Color::White, sf::Color::Red, sf::Color::Blue);
   }
 
-  buttons["2560"] = new Button(500, 100, 200, 30, &font, "2560x1080", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["2560"] = new Button(100, 150, 200, 30, &font, "2560x1080", sf::Color::White, sf::Color::Red, sf::Color::Blue);
 
-  buttons["1920"] = new Button(500, 200, 200, 30, &font, "1920x1080", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["1920"] = new Button(100, 200, 200, 30, &font, "1920x1080", sf::Color::White, sf::Color::Red, sf::Color::Blue);
 
-  buttons["1600"] = new Button(500, 300, 200, 30, &font, "1600x900", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["1600"] = new Button(100, 250, 200, 30, &font, "1600x900", sf::Color::White, sf::Color::Red, sf::Color::Blue);
 
-  buttons["720"] = new Button(500, 400, 200, 30, &font, "1280x720", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["720"] = new Button(100, 300, 200, 30, &font, "1280x720", sf::Color::White, sf::Color::Red, sf::Color::Blue);
 
   buttons["GAME_MENU"] = new Button(100, window.getSize().y - 50, 200, 30, &font, "Back", sf::Color::White, sf::Color::Red, sf::Color::Blue);
 }
@@ -194,7 +195,8 @@ void Settings::update(const sf::Time dt) {
 }
 
 void Settings::renderButtons(sf::RenderTarget& target) {
-  for (auto& it : buttons) {
+  for (auto& it : buttons) 
+  {
 	it.second->render(target);
   }
 }
