@@ -2,6 +2,7 @@
 #include "State.hpp"
 #include "SettingsState.hpp"
 #include "Button.hpp"
+#include "GameState_easy.hpp"
 
 class MainMenuState : public State {
  public:

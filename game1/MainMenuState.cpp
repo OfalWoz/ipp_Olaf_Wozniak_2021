@@ -1,16 +1,16 @@
 #include "MainMenuState.hpp"
 
 void MainMenuState::initButtons() {
-	font.loadFromFile("fonts/arial.ttf");
-  buttons["GAME_STATE"] = new Button(100, 50, 150, 30,
+	font.loadFromFile("fonts/RoguedashSolid-BWjqx.otf");
+  buttons["GAME_STATE"] = new Button(window.getSize().x / 2 - 100, 150, 150, 30,
 	&font,"New Game", 
 	sf::Color::White, sf::Color::Red, sf::Color::Blue);
 
-  buttons["GAME_SET"] = new Button(325, 48, 150, 30,
+  buttons["GAME_SET"] = new Button(window.getSize().x / 2 - 100, 200, 150, 30,
 	&font, "Settings", 
 	sf::Color::White, sf::Color::Red, sf::Color::Blue);
 
-  buttons["GAME_EXIT"] = new Button(500, 50, 150, 30,
+  buttons["GAME_EXIT"] = new Button(window.getSize().x / 2 - 100, 250, 150, 30,
 	&font, "Quit", 
 	sf::Color::White, sf::Color::Red, sf::Color::Blue);
 }
@@ -19,7 +19,7 @@ MainMenuState::MainMenuState(sf::RenderWindow& window, std::stack<std::shared_pt
 	: State(window, states) {
   initButtons();
   
-  if (!backText.loadFromFile("textures/back2.png")) {
+  if (!backText.loadFromFile("textures/back.png")) {
 	  std::cout << "ERROR::LOADING BACKGROUND TEXTURES\n";
   }
   sf::Vector2f back = (sf::Vector2f)backText.getSize();
@@ -33,15 +33,15 @@ MainMenuState::MainMenuState(sf::RenderWindow& window, std::stack<std::shared_pt
   woz.setTexture(&wozText);
 
   logo.setFont(font);
-  logo.setString("The_Bird");
+  logo.setString("the crazy feathers");
   logo.setCharacterSize(100);
-  logo.setPosition(window.getSize().x - 500, 20);
+  logo.setPosition(window.getSize().x/2 - 350, 20);
 
   
   text.setFont(font);
   text.setString("@ofalwoz");
   text.setCharacterSize(20);
-  text.setPosition(window.getSize().x - 150, window.getSize().y - 50);
+  text.setPosition(window.getSize().x - 140, window.getSize().y - 50);
 }
 
 void MainMenuState::updateMousePosition() {
@@ -65,7 +65,7 @@ void MainMenuState::update(const sf::Time dt) {
 	states.push(std::shared_ptr<State>(new Settings(window, states)));
   }
   if (buttons["GAME_STATE"]->isPressed()) {
-	//states.push(std::shared_ptr<State>(new MapChose(window, states)));
+	states.push(std::shared_ptr<State>(new GameState_easy(window, states)));
   }
 }
 

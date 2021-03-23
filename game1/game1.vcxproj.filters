@@ -39,6 +39,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameState_easy.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -47,14 +50,17 @@
     <ClInclude Include="Button.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenuState.hpp">
-      <Filter>States</Filter>
+    <ClInclude Include="GameState_easy.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="State.hpp">
-      <Filter>States</Filter>
+    <ClInclude Include="MainMenuState.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SettingsState.hpp">
-      <Filter>States</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
