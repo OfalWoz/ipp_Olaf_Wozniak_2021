@@ -17,6 +17,14 @@ public:
 	void handleEvent(const sf::Event& event);
 
 private:
+	float bird_vx = 2;
+	float bird_vy = 2;
+	float bird_x = 100;
+	float bird_y = 100;
+
+	sf::Sprite bird;
+	sf::Texture birdText;
+
 	sf::Sprite background;
 	sf::Texture backText;
 	sf::Font font;
