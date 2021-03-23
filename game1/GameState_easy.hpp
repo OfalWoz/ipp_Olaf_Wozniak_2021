@@ -11,6 +11,8 @@ public:
 
 	void updateMousePosition();
 	void updateButtons();
+	void updatePiorko();
+	void updateBird();
 	void update(const sf::Time dt);
 	void renderButtons(sf::RenderTarget& target);
 	void draw();
@@ -22,8 +24,16 @@ private:
 	float bird_x = 100;
 	float bird_y = 100;
 
+	float px = rand() % 400 + 100;
+	float py = rand() % 400 + 100;
+
+	int ptk = 0;
+
 	sf::Sprite bird;
 	sf::Texture birdText;
+
+	sf::Sprite piorko;
+	sf::Texture piorkoText;
 
 	sf::Sprite background;
 	sf::Texture backText;

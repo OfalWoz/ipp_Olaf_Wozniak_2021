@@ -7,6 +7,10 @@ GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_
 	{
 		std::cout << "ERROR::LOADING BIRD TEXTURES\n";
 	}
+	if (!piorkoText.loadFromFile("textures/piorko.png"))
+	{
+		std::cout << "ERROR::LOADING POINT TEXTURES\n";
+	}
 	if (!backText.loadFromFile("textures/back.png"))
 	{
 		std::cout << "ERROR::LOADING BACKGROUND TEXTURES\n";
@@ -16,6 +20,8 @@ GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_
 	bird.setScale(sf::Vector2f(window.getSize().x / 500, window.getSize().x / 500));
 	background.setTexture(backText);
 	bird.setTexture(birdText);
+	piorko.setTexture(piorkoText);
+	piorko.setPosition(px, py);
 }
 
 GameState_easy::~GameState_easy()
@@ -41,11 +47,22 @@ void GameState_easy::updateButtons()
 	}
 }
 
-void GameState_easy::update(const sf::Time dt)
+void GameState_easy::updatePiorko()
 {
-	updateMousePosition();
-	updateButtons();
+	if (bird.getGlobalBounds().intersects(piorko.getGlobalBounds()))
+	{
+		int px = rand() % (window.getSize().x - 100) + 100;
+		int py = rand() % (window.getSize().y - 100) + 100;
+		ptk++;
+		std::cout << ptk << "\n";
+		window.clear();
+		piorko.setPosition(px, py);
+	}
+	
+}
 
+void GameState_easy::updateBird()
+{
 	bird_x = bird_x + bird_vx;
 	bird_y = bird_y + bird_vy * 2;
 	bird_vy = bird_vy - 0.1 * (-2);
@@ -58,6 +75,14 @@ void GameState_easy::update(const sf::Time dt)
 		bird_x = -10;
 	}
 	bird.setPosition(bird_x, bird_y);
+}
+
+void GameState_easy::update(const sf::Time dt)
+{
+	updateMousePosition();
+	updateButtons();
+	updatePiorko();
+	updateBird();
 }
 
 void GameState_easy::initButtons()
@@ -77,14 +102,15 @@ void GameState_easy::draw()
 	window.draw(background);
 	renderButtons(window);
 	window.draw(bird);
+	window.draw(piorko);
 }
 
 void GameState_easy::handleEvent(const sf::Event& event)
 {
-	if (event.key.code == sf::Keyboard::Up)
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up)
 	{
 		bird_y = bird_y - 1;
-		bird_vy = -3;
+		bird_vy = -5;
 	}
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
 	{
