@@ -2,7 +2,7 @@
 #include "State.hpp"
 #include "SettingsState.hpp"
 #include "Button.hpp"
-#include "GameState_easy.hpp"
+#include "HardLevelState.hpp"
 
 class MainMenuState : public State {
  public:
@@ -32,6 +32,5 @@ class MainMenuState : public State {
   sf::Vector2f mousePosView;
 
   sf::CircleShape woz;
-
   sf::Texture wozText;
 };

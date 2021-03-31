@@ -42,7 +42,8 @@ void GameState_easy::updateMousePosition()
 
 void GameState_easy::updateButtons()
 {
-	for (auto& it : buttons) {
+	for (auto& it : buttons) 
+	{
 		it.second->update(mousePosView);
 	}
 }
@@ -52,7 +53,7 @@ void GameState_easy::updatePiorko()
 	if (bird.getGlobalBounds().intersects(piorko.getGlobalBounds()))
 	{
 		int px = rand() % (window.getSize().x - 100) + 100;
-		int py = rand() % (window.getSize().y - 100) + 100;
+		int py = rand() % (window.getSize().y - 200) + 100;
 		ptk++;
 		std::cout << ptk << "\n";
 		window.clear();
@@ -107,7 +108,7 @@ void GameState_easy::draw()
 
 void GameState_easy::handleEvent(const sf::Event& event)
 {
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up)
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up || event.key.code == sf::Mouse::Left)
 	{
 		bird_y = bird_y - 1;
 		bird_vy = -5;

@@ -1,6 +1,6 @@
 #pragma once
 #include "State.hpp"
-#include "SettingsState.hpp"
+#include "HardLevelState.hpp"
 #include "Button.hpp"
 
 class GameState_easy : public State
