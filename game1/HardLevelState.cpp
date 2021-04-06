@@ -29,11 +29,11 @@ HardLevelState::~HardLevelState()
 
 void HardLevelState::initButtons()
 {
-	buttons["GAME_EASY"] = new Button(200, 150, 150, 30, &font, "Easy", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["GAME_EASY"] = new Button(window.getSize().x / 2 - 100, 150, 150, 30, &font, "Easy", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-	buttons["GAME_NORMAL"] = new Button(window.getSize().x / 2 - 100, 150, 150, 30, &font, "Normal", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["GAME_NORMAL"] = new Button(window.getSize().x / 2 - 100, 200, 150, 30, &font, "Normal", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-	buttons["GAME_HARD"] = new Button(window.getSize().x - 300, 150, 150, 30, &font, "Hard", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["GAME_HARD"] = new Button(window.getSize().x / 2 - 100, 250, 150, 30, &font, "Hard", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
 	buttons["GAME_MENU"] = new Button(100, window.getSize().y - 50, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 }
@@ -60,6 +60,10 @@ void HardLevelState::update(const sf::Time dt)
 	if (buttons["GAME_EASY"]->isPressed())
 	{
 		states.push(std::shared_ptr<State>(new GameState_easy(window, states)));
+	}
+	if (buttons["GAME_NORMAL"]->isPressed())
+	{
+		states.push(std::shared_ptr<State>(new GameState_normal(window, states)));
 	}
 	if (buttons["GAME_MENU"]->isPressed()) 
 	{

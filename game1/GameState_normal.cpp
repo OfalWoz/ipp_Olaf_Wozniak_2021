@@ -1,7 +1,6 @@
-#include "GameState_easy.hpp"
+#include "GameState_normal.hpp"
 
-
-GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states) 
+GameState_normal::GameState_normal(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states)
 {
 	font.loadFromFile("fonts/RoguedashSolid-BWjqx.otf");
 	initButtons();
@@ -29,9 +28,10 @@ GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_
 	background.setTexture(backText);
 	bird.setTexture(birdText);
 
+	
 	sf::Vector2f rock_size = (sf::Vector2f)rockText.getSize();
 	rock.setTexture(rockText);
-	rock.setScale(sf::Vector2f(window.getSize().x / (rock_size.x * 15), window.getSize().y / (rock_size.y * 15)));
+	rock.setScale(sf::Vector2f(1,2));
 	rock.setPosition(rx, ry);
 
 	piorko.setTexture(piorkoText);
@@ -44,53 +44,60 @@ GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_
 	wynik.setPosition(10, 10);
 }
 
-GameState_easy::~GameState_easy()
+GameState_normal::~GameState_normal()
 {
 	auto it = buttons.begin();
-	for (it = buttons.begin(); it != buttons.end(); ++it) 
+	for (it = buttons.begin(); it != buttons.end(); ++it)
 	{
 		delete it->second;
 	}
 }
 
-void GameState_easy::updateMousePosition()
+void GameState_normal::updateMousePosition()
 {
 	mousePosScreen = sf::Mouse::getPosition();
 	mousePosWindow = sf::Mouse::getPosition(window);
 	mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 }
 
-void GameState_easy::updateButtons()
+void GameState_normal::updateButtons()
 {
-	for (auto& it : buttons) 
+	for (auto& it : buttons)
 	{
 		it.second->update(mousePosView);
 	}
 }
 
-void GameState_easy::updatePiorko()
+void GameState_normal::updatePiorko()
 {
 	if (bird.getGlobalBounds().intersects(piorko.getGlobalBounds()))
 	{
 		int px = rand() % (window.getSize().x - 100) + 100;
 		int py = rand() % (window.getSize().y - 300) + 200;
-		int rx = rand() % (window.getSize().x - 100) + 200;
-		int ry = rand() % (window.getSize().y - 300) + 200;
 		ptk++;
 		std::cout << ptk << "\n";
 		window.clear();
 		piorko.setPosition(px, py);
-		rock.setPosition(rx, ry);
 		punkt = std::to_string(ptk);
 		wynik.setString("Score: " + punkt);
 	}
 }
 
-void GameState_easy::updateBird()
+void GameState_normal::updateBird()
 {
 	bird_x = bird_x + bird_vx;
 	bird_y = bird_y + bird_vy * 2;
 	bird_vy = bird_vy - 0.1 * (-2);
+	ry = ry - rock_vy;
+	
+	if (ry == (window.getSize().y/2) -100)
+	{
+		rock_vy = -1;
+	}
+	if (ry == window.getSize().y)
+	{
+		rock_vy = 1;
+	}
 	if (bird_vy > 2)
 	{
 		bird_vy = 2;
@@ -99,61 +106,52 @@ void GameState_easy::updateBird()
 	{
 		bird_x = -10;
 	}
-	if (bird_y > window.getSize().y)
-	{
-		bird_y = 0;
-	}
-	if (bird_y < -10)
-	{
-		bird_y = window.getSize().y;
-	}
 	bird.setPosition(bird_x, bird_y);
+	rock.setPosition(rx, ry);
 }
 
-void GameState_easy::updateRock()
+void GameState_normal::updateRock(const sf::Time dt)
 {
-	if (rock.getGlobalBounds().intersects(piorko.getGlobalBounds()))
+	if (ry <= window.getSize().y)
 	{
-		int rx = rand() % (window.getSize().x - 100) + 200;
-		int ry = rand() % (window.getSize().y - 300) + 200;
-		window.clear();
-		rock.setPosition(rx, ry);
-	}
-	if (bird.getGlobalBounds().intersects(rock.getGlobalBounds()))
-	{
-		int rx = rand() % (window.getSize().x - 100) + 100;
-		int ry = rand() % (window.getSize().y - 300) + 200;
-		std::cout << "kolizja\n";
-		ptk--;
-		window.clear();
-		rock.setPosition(rx, ry);
-		punkt = std::to_string(ptk);
-		wynik.setString("Score: " + punkt);
+		timeSinceLastUpdateSpecial += dt;
+		if (timeSinceLastUpdateSpecial > sf::seconds(1.f)) 
+		{
+			if (bird.getGlobalBounds().intersects(rock.getGlobalBounds()))
+			{
+				timeSinceLastUpdateSpecial = sf::seconds(0.f);
+				std::cout << "kolizja\n";
+				ptk--;
+				window.clear();
+				punkt = std::to_string(ptk);
+				wynik.setString("Score: " + punkt);
+			}
+		}
+		if (bird_y > window.getSize().y || bird_y < -10)
+		{
+			states.pop();
+		}
 	}
 }
 
-void GameState_easy::update(const sf::Time dt)
+void GameState_normal::update(const sf::Time dt)
 {
 	updateMousePosition();
 	updateButtons();
 	updatePiorko();
 	updateBird();
-	updateRock();
+	updateRock(dt);
 }
 
-void GameState_easy::initButtons()
+void GameState_normal::renderButtons(sf::RenderTarget& target)
 {
-}
-
-void GameState_easy::renderButtons(sf::RenderTarget& target)
-{
-	for (auto& it : buttons) 
+	for (auto& it : buttons)
 	{
 		it.second->render(target);
 	}
 }
 
-void GameState_easy::draw()
+void GameState_normal::draw()
 {
 	window.draw(background);
 	renderButtons(window);
@@ -163,7 +161,7 @@ void GameState_easy::draw()
 	window.draw(wynik);
 }
 
-void GameState_easy::handleEvent(const sf::Event& event)
+void GameState_normal::handleEvent(const sf::Event& event)
 {
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up || event.key.code == sf::Mouse::Left)
 	{
@@ -174,4 +172,8 @@ void GameState_easy::handleEvent(const sf::Event& event)
 	{
 		states.pop();
 	}
+}
+
+void GameState_normal::initButtons()
+{
 }

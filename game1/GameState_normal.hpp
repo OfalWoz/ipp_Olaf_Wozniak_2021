@@ -2,39 +2,38 @@
 #include "State.hpp"
 #include "HardLevelState.hpp"
 #include "Button.hpp"
-#include <iostream>
-#include <sstream>
-#include <string>
 
-class GameState_easy : public State
+class GameState_normal : public State
 {
 public:
-	GameState_easy(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states);
-	~GameState_easy();
+	GameState_normal(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states);
+	~GameState_normal();
 
 	void updateMousePosition();
 	void updateButtons();
 	void updatePiorko();
 	void updateBird();
-	void updateRock();
+	void updateRock(const sf::Time dt);
 	void update(const sf::Time dt);
 	void renderButtons(sf::RenderTarget& target);
 	void draw();
 	void handleEvent(const sf::Event& event);
 
 private:
-	float bird_vx = 2;
+	float bird_vx = 5;
 	float bird_vy = 2;
+	float rock_vy = 1;
 	float bird_x = 100;
-	float bird_y = 100;
+	float bird_y = 500;
 
-	float px = rand() % 400 + 200;
-	float py = rand() % 400 + 200;
+	float px = rand() % 400 + 100;
+	float py = rand() % 400 + 100;
 
-	int rx = rand() % (window.getSize().x - 100) + 200;
-	int ry = rand() % (window.getSize().y - 300) + 200;
-
+	int rx = 1000;
+	int ry = window.getSize().y - 100;
 	int ptk = 0;
+
+	sf::Time timeSinceLastUpdateSpecial;
 
 	sf::Sprite bird;
 	sf::Texture birdText;

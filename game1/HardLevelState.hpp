@@ -3,6 +3,7 @@
 #include "Application.hpp"
 #include "Button.hpp"
 #include "GameState_easy.hpp"
+#include "GameState_normal.hpp"
 
 class HardLevelState : public State
 {
@@ -29,4 +30,3 @@ private:
 	sf::Vector2i mousePosWindow;
 	sf::Vector2f mousePosView;
 };
-

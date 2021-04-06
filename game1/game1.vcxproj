@@ -166,6 +166,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="GameState_easy.cpp" />
+    <ClCompile Include="GameState_normal.cpp" />
     <ClCompile Include="HardLevelState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="GameState_easy.hpp" />
+    <ClInclude Include="GameState_normal.hpp" />
     <ClInclude Include="HardLevelState.hpp" />
     <ClInclude Include="MainMenuState.hpp" />
     <ClInclude Include="SettingsState.hpp" />

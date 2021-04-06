@@ -6,11 +6,19 @@ void MainMenuState::initButtons() {
 		&font,"New Game", 
 		sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-	buttons["GAME_SET"] = new Button(window.getSize().x / 2 - 100, 200, 150, 30,
+	buttons["GAME_HIGHT"] = new Button(window.getSize().x / 2 - 100, 200, 150, 30,
+		&font, "Hight Scores",
+		sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+
+	buttons["GAME_HOW"] = new Button(window.getSize().x / 2 - 100, 250, 150, 30,
+		&font, "How to play?",
+		sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+
+	buttons["GAME_SET"] = new Button(window.getSize().x / 2 - 100, 300, 150, 30,
 		&font, "Settings", 
 		sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-	buttons["GAME_EXIT"] = new Button(window.getSize().x / 2 - 100, 250, 150, 30,
+	buttons["GAME_EXIT"] = new Button(window.getSize().x / 2 - 100, 350, 150, 30,
 		&font, "Quit", 
 		sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 }
