@@ -4,6 +4,7 @@
 #include "Button.hpp"
 #include "GameState_easy.hpp"
 #include "GameState_normal.hpp"
+#include "GameState_hard.hpp"
 
 class HardLevelState : public State
 {

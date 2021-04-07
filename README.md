@@ -19,14 +19,14 @@ http://panoramx.ift.uni.wroc.pl/~owozniak/lista9/zadanie2.html
 - Działające menu
 - Proste ustawienia
 
-## Zadanie 1.2 (6.04)
+## Zadanie 1.2 (13.04)
 - Rozbudowanie rozgrywki
 - Dodanie poziomów trudności
 
-## Zadanie 1.3 (20.04)
+## Zadanie 1.3 (4.05)
 - Dodanie tablic z najlepszymi wynikami
 - rozgrywka dla 2 graczy
 
-## Zadanie 1.4 (11.05)
+## Zadanie 1.4 (25.05)
 - Ewentualne poprawki wyglądu i rozgrywki
 - Stworzenie instalatora dla systemów Windows

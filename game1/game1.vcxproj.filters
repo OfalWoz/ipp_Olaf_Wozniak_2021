@@ -48,6 +48,9 @@
     <ClCompile Include="GameState_normal.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="GameState_hard.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -72,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameState_normal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState_hard.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

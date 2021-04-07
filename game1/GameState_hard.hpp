@@ -3,11 +3,11 @@
 #include "HardLevelState.hpp"
 #include "Button.hpp"
 
-class GameState_normal : public State
+class GameState_hard : public State
 {
 public:
-	GameState_normal(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states);
-	~GameState_normal();
+	GameState_hard(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states);
+	~GameState_hard();
 
 	void updateMousePosition();
 	void updateButtons();
@@ -21,16 +21,20 @@ public:
 
 private:
 	float bird_vx = 5;
-	float bird_vy = 2;
+	float bird_vy = 2.5;
 	float rock_vy = 2;
+	float rock_vy2 = -2;
+
 	float bird_x = 100;
 	float bird_y = 500;
 
 	float px = rand() % 400 + 200;
 	float py = rand() % 400 + 200;
 
-	int rx = 1000;
-	int ry = window.getSize().y - 100;
+	int rx = 896;
+	int ry = window.getSize().y;
+	int rx2 = 1000;
+	int ry2 = 0;
 	int ptk = 0;
 
 	sf::Time timeSinceLastUpdateSpecial;
@@ -43,6 +47,8 @@ private:
 
 	sf::Sprite rock;
 	sf::Texture rockText;
+	sf::Sprite rock2;
+	sf::Texture rockText2;
 
 	sf::Sprite background;
 	sf::Texture backText;

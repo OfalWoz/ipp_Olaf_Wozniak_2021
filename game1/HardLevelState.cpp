@@ -65,6 +65,10 @@ void HardLevelState::update(const sf::Time dt)
 	{
 		states.push(std::shared_ptr<State>(new GameState_normal(window, states)));
 	}
+	if (buttons["GAME_HARD"]->isPressed())
+	{
+		states.push(std::shared_ptr<State>(new GameState_hard(window, states)));
+	}
 	if (buttons["GAME_MENU"]->isPressed()) 
 	{
 		states.pop();

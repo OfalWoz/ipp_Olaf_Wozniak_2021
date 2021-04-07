@@ -16,7 +16,7 @@ public:
 	void updateButtons();
 	void updatePiorko();
 	void updateBird();
-	void updateRock();
+	void updateRock(const sf::Time dt);
 	void update(const sf::Time dt);
 	void renderButtons(sf::RenderTarget& target);
 	void draw();
@@ -31,10 +31,12 @@ private:
 	float px = rand() % 400 + 200;
 	float py = rand() % 400 + 200;
 
-	int rx = rand() % (window.getSize().x - 100) + 200;
-	int ry = rand() % (window.getSize().y - 300) + 200;
+	int rx = 1000;
+	int ry = window.getSize().y/2;
 
 	int ptk = 0;
+
+	sf::Time timeSinceLastUpdateSpecial;
 
 	sf::Sprite bird;
 	sf::Texture birdText;

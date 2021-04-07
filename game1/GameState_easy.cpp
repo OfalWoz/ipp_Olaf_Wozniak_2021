@@ -3,7 +3,7 @@
 
 GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states) 
 {
-	font.loadFromFile("fonts/RoguedashSolid-BWjqx.otf");
+	font.loadFromFile("fonts/arial.ttf");
 	initButtons();
 	if (!birdText.loadFromFile("textures/redbird-upflap.png"))
 	{
@@ -31,7 +31,7 @@ GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_
 
 	sf::Vector2f rock_size = (sf::Vector2f)rockText.getSize();
 	rock.setTexture(rockText);
-	rock.setScale(sf::Vector2f(window.getSize().x / (rock_size.x * 15), window.getSize().y / (rock_size.y * 15)));
+	rock.setScale(sf::Vector2f(2, 2));
 	rock.setPosition(rx, ry);
 
 	piorko.setTexture(piorkoText);
@@ -39,7 +39,7 @@ GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_
 
 	wynik.setFont(font);
 	punkt = std::to_string(ptk);
-	wynik.setString("Score: " + punkt);
+	wynik.setString("Score: " + punkt + "/25");
 	wynik.setCharacterSize(50);
 	wynik.setPosition(10, 10);
 }
@@ -74,15 +74,12 @@ void GameState_easy::updatePiorko()
 	{
 		int px = rand() % (window.getSize().x - 100) + 100;
 		int py = rand() % (window.getSize().y - 300) + 200;
-		int rx = rand() % (window.getSize().x - 100) + 200;
-		int ry = rand() % (window.getSize().y - 300) + 200;
 		ptk++;
 		std::cout << ptk << "\n";
 		window.clear();
 		piorko.setPosition(px, py);
-		rock.setPosition(rx, ry);
 		punkt = std::to_string(ptk);
-		wynik.setString("Score: " + punkt);
+		wynik.setString("Score: " + punkt + "/25");
 	}
 }
 
@@ -110,25 +107,26 @@ void GameState_easy::updateBird()
 	bird.setPosition(bird_x, bird_y);
 }
 
-void GameState_easy::updateRock()
+void GameState_easy::updateRock(const sf::Time dt)
 {
 	if (rock.getGlobalBounds().intersects(piorko.getGlobalBounds()))
 	{
-		int rx = rand() % (window.getSize().x - 100) + 200;
-		int ry = rand() % (window.getSize().y - 300) + 200;
+		float px = rand() % 400 + 200;
+		float py = rand() % 400 + 200;
 		window.clear();
-		rock.setPosition(rx, ry);
+		piorko.setPosition(px, py);
 	}
-	if (bird.getGlobalBounds().intersects(rock.getGlobalBounds()))
+	timeSinceLastUpdateSpecial += dt;
+	if (timeSinceLastUpdateSpecial > sf::seconds(1.f))
 	{
-		int rx = rand() % (window.getSize().x - 100) + 100;
-		int ry = rand() % (window.getSize().y - 300) + 200;
-		std::cout << "kolizja\n";
-		ptk--;
-		window.clear();
-		rock.setPosition(rx, ry);
-		punkt = std::to_string(ptk);
-		wynik.setString("Score: " + punkt);
+		if (bird.getGlobalBounds().intersects(rock.getGlobalBounds()))
+		{
+			timeSinceLastUpdateSpecial = sf::seconds(0.f);
+			std::cout << "kolizja\n";
+			ptk--;
+			punkt = std::to_string(ptk);
+			wynik.setString("Score: " + punkt + "/25");
+		}
 	}
 }
 
@@ -138,7 +136,7 @@ void GameState_easy::update(const sf::Time dt)
 	updateButtons();
 	updatePiorko();
 	updateBird();
-	updateRock();
+	updateRock(dt);
 }
 
 void GameState_easy::initButtons()
