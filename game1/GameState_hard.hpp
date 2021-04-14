@@ -3,6 +3,7 @@
 #include "HardLevelState.hpp"
 #include "Button.hpp"
 #include "WinningState_single.hpp"
+#include "LoseState_single.hpp"
 
 class GameState_hard : public State
 {

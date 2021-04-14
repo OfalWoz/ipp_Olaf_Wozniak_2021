@@ -155,7 +155,7 @@ void GameState_hard::updateRock(const sf::Time dt)
 		}
 		if (bird_y > window.getSize().y || bird_y < -10)
 		{
-			states.pop();
+			states.push(std::shared_ptr<State>(new LoseState_single(window, states)));
 		}
 	}
 }
@@ -164,18 +164,22 @@ void GameState_hard::update(const sf::Time dt)
 {
 	updateMousePosition();
 	updateButtons();
-	if (ptk < 25)
-	{
-		updatePiorko();
-		updateBird();
-		updateRock(dt);
-	}
-	else
+	if (ptk > 25)
 	{
 		end = clock();
 		double roznica = difftime(end, start);
 		printf("The time was: %f\n", roznica / CLK_TCK);
 		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica)));
+	}
+	if (ptk == -5)
+	{
+		states.push(std::shared_ptr<State>(new LoseState_single(window, states)));
+	}
+	else
+	{
+		updatePiorko();
+		updateBird();
+		updateRock(dt);
 	}
 }
 

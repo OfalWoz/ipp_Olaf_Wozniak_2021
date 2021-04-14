@@ -3,6 +3,9 @@
 #include "SettingsState.hpp"
 #include "Button.hpp"
 #include "HardLevelState.hpp"
+#include <iostream>
+#include <sstream>
+#include <string>
 #include <time.h>
 #include <stdio.h>
 #include <dos.h>
