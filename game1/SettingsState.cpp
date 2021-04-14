@@ -40,21 +40,21 @@ void Settings::initButtons() {
 
   //wyswietlanie odpowiedniego przycisku zaleznie od tego czy gra jest na pelnym ekranie czy w okienku
   if (fullscreen) {
-	  buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Windowed", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+	  buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Windowed", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
   }
   else {
-	  buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Full Screen", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+	  buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Full Screen", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
   }
 
-  buttons["2560"] = new Button(100, 150, 200, 30, &font, "2560x1080", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["2560"] = new Button(100, 150, 200, 30, &font, "2560x1080", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-  buttons["1920"] = new Button(100, 200, 200, 30, &font, "1920x1080", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["1920"] = new Button(100, 200, 200, 30, &font, "1920x1080", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-  buttons["1600"] = new Button(100, 250, 200, 30, &font, "1600x900", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["1600"] = new Button(100, 250, 200, 30, &font, "1600x900", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-  buttons["720"] = new Button(100, 300, 200, 30, &font, "1280x720", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["720"] = new Button(100, 300, 200, 30, &font, "1280x720", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-  buttons["GAME_MENU"] = new Button(100, window.getSize().y - 50, 200, 30, &font, "Back", sf::Color::White, sf::Color::Red, sf::Color::Blue);
+  buttons["GAME_MENU"] = new Button(100, window.getSize().y - 50, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 }
 
 void Settings::updateMousePosition() {
@@ -91,8 +91,10 @@ void Settings::update(const sf::Time dt) {
   ifs.close();
 
   //Wpisywanie do pliku config.ini zmian i resetowanie aplikacji w celu wczytaniu tych zmian z pliku
-  if (buttons["SCREEN"]->isPressed()) {
-	  if (fullscreen) {
+  if (buttons["SCREEN"]->isPressed()) 
+  {
+	  if (fullscreen) 
+	  {
 		  std::ofstream ofs("config/window.ini");
 		  if (ofs.is_open()) {
 			  ofs << title << "\n";
@@ -107,9 +109,11 @@ void Settings::update(const sf::Time dt) {
 		  Application app;
 		  app.run();
 	  }
-	  else {
+	  else 
+	  {
 		  std::ofstream ofs("config/window.ini");
-		  if (ofs.is_open()) {
+		  if (ofs.is_open()) 
+		  {
 			  ofs << title << "\n";
 			  ofs << window_bounds.width << " " << window_bounds.height << "\n";
 			  ofs << "1\n";                                      //0 - to jest tryb okienkowy, 1 - fullscreen
@@ -125,9 +129,11 @@ void Settings::update(const sf::Time dt) {
 	
   }
 
-  if (buttons["2560"]->isPressed()) {
+  if (buttons["2560"]->isPressed()) 
+  {
 	  std::ofstream ofs("config/window.ini");
-	  if (ofs.is_open()) {
+	  if (ofs.is_open()) 
+	  {
 		  ofs << title << "\n";
 		  ofs << "2560 1080\n";
 		  ofs << fullscreen << "\n";;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
@@ -141,9 +147,11 @@ void Settings::update(const sf::Time dt) {
 	  app.run();
   }
 
-  if (buttons["1920"]->isPressed()) {
+  if (buttons["1920"]->isPressed()) 
+  {
 	  std::ofstream ofs("config/window.ini");
-	  if (ofs.is_open()) {
+	  if (ofs.is_open()) 
+	  {
 		  ofs << title << "\n";
 		  ofs << "1920 1080\n";
 		  ofs << fullscreen << "\n";;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
@@ -157,9 +165,11 @@ void Settings::update(const sf::Time dt) {
 	  app.run();
   }
 
-  if (buttons["1600"]->isPressed()) {
+  if (buttons["1600"]->isPressed()) 
+  {
 	  std::ofstream ofs("config/window.ini");
-	  if (ofs.is_open()) {
+	  if (ofs.is_open()) 
+	  {
 		  ofs << title << "\n";
 		  ofs << "1600 900\n";
 		  ofs << fullscreen << "\n";;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
@@ -173,9 +183,11 @@ void Settings::update(const sf::Time dt) {
 	  app.run();
   }
 
-  if (buttons["720"]->isPressed()) {
+  if (buttons["720"]->isPressed()) 
+  {
 	  std::ofstream ofs("config/window.ini");
-	  if (ofs.is_open()) {
+	  if (ofs.is_open()) 
+	  {
 		  ofs << title << "\n";
 		  ofs << "1280 720\n";
 		  ofs << fullscreen << "\n";;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
@@ -189,7 +201,8 @@ void Settings::update(const sf::Time dt) {
 	  app.run();
   }
 
-  if (buttons["GAME_MENU"]->isPressed()) {
+  if (buttons["GAME_MENU"]->isPressed()) 
+  {
 	states.pop();
   }
 }
