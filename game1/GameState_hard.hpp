@@ -2,6 +2,7 @@
 #include "State.hpp"
 #include "HardLevelState.hpp"
 #include "Button.hpp"
+#include "WinningState_single.hpp"
 
 class GameState_hard : public State
 {
@@ -36,6 +37,8 @@ private:
 	int rx2 = 1000;
 	int ry2 = 0;
 	int ptk = 0;
+
+	clock_t start, end;
 
 	sf::Time timeSinceLastUpdateSpecial;
 

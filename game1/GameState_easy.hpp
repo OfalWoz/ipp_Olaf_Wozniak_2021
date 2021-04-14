@@ -2,6 +2,7 @@
 #include "State.hpp"
 #include "HardLevelState.hpp"
 #include "Button.hpp"
+#include "WinningState_single.hpp"
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -23,8 +24,8 @@ public:
 	void handleEvent(const sf::Event& event);
 
 private:
-	float bird_vx = 2;
-	float bird_vy = 2;
+	float bird_vx = 5;
+	float bird_vy = 2.5;
 	float bird_x = 100;
 	float bird_y = 100;
 
@@ -35,6 +36,8 @@ private:
 	int ry = window.getSize().y/2;
 
 	int ptk = 0;
+
+	clock_t start, end;
 
 	sf::Time timeSinceLastUpdateSpecial;
 

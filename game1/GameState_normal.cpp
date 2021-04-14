@@ -28,7 +28,6 @@ GameState_normal::GameState_normal(sf::RenderWindow& window, std::stack<std::sha
 	background.setTexture(backText);
 	bird.setTexture(birdText);
 
-	
 	sf::Vector2f rock_size = (sf::Vector2f)rockText.getSize();
 	rock.setTexture(rockText);
 	rock.setScale(sf::Vector2f(2,2));
@@ -42,6 +41,8 @@ GameState_normal::GameState_normal(sf::RenderWindow& window, std::stack<std::sha
 	wynik.setString("Score: " + punkt + "/25");
 	wynik.setCharacterSize(50);
 	wynik.setPosition(10, 10);
+
+	start = clock();
 }
 
 GameState_normal::~GameState_normal()
@@ -138,9 +139,19 @@ void GameState_normal::update(const sf::Time dt)
 {
 	updateMousePosition();
 	updateButtons();
-	updatePiorko();
-	updateBird();
-	updateRock(dt);
+	if (ptk < 25)
+	{
+		updatePiorko();
+		updateBird();
+		updateRock(dt);
+	}
+	else
+	{
+		end = clock();
+		double roznica = difftime(end, start);
+		printf("The time was: %f\n", roznica / CLK_TCK);
+		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica)));
+	}
 }
 
 void GameState_normal::renderButtons(sf::RenderTarget& target)

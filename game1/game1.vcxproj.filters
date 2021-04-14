@@ -51,6 +51,9 @@
     <ClCompile Include="GameState_hard.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="WinningState_single.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameState_hard.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinningState_single.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

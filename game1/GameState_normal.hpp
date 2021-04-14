@@ -2,6 +2,7 @@
 #include "State.hpp"
 #include "HardLevelState.hpp"
 #include "Button.hpp"
+#include "WinningState_single.hpp"
 
 class GameState_normal : public State
 {
@@ -21,7 +22,7 @@ public:
 
 private:
 	float bird_vx = 5;
-	float bird_vy = 2;
+	float bird_vy = 2.5;
 	float rock_vy = 2;
 	float bird_x = 100;
 	float bird_y = 500;
@@ -32,6 +33,8 @@ private:
 	int rx = 1000;
 	int ry = window.getSize().y - 100;
 	int ptk = 0;
+
+	clock_t start, end;
 
 	sf::Time timeSinceLastUpdateSpecial;
 

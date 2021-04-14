@@ -1,6 +1,5 @@
 #include "GameState_easy.hpp"
 
-
 GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states) 
 {
 	font.loadFromFile("fonts/arial.ttf");
@@ -42,6 +41,8 @@ GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_
 	wynik.setString("Score: " + punkt + "/25");
 	wynik.setCharacterSize(50);
 	wynik.setPosition(10, 10);
+	
+	start = clock();
 }
 
 GameState_easy::~GameState_easy()
@@ -132,11 +133,22 @@ void GameState_easy::updateRock(const sf::Time dt)
 
 void GameState_easy::update(const sf::Time dt)
 {
+	
 	updateMousePosition();
 	updateButtons();
-	updatePiorko();
-	updateBird();
-	updateRock(dt);
+	if (ptk < 25) 
+	{
+		updatePiorko();
+		updateBird();
+		updateRock(dt);
+	}
+	else
+	{
+		end = clock();
+		double roznica = difftime(end, start);
+		printf("The time was: %f\n", roznica / CLK_TCK);
+		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica)));
+	}
 }
 
 void GameState_easy::initButtons()
