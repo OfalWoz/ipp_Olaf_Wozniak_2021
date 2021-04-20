@@ -80,15 +80,16 @@ void Settings::update(const sf::Time dt) {
 	unsigned int framerate_limit = 120;
 	bool vertival_sync_enabled = false;
 	unsigned antialiasing_level = 0;
-  if (ifs.is_open()) {
-	std::getline(ifs, title);
-	ifs >> window_bounds.width >> window_bounds.height;
-	ifs >> fullscreen;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
-	ifs >> framerate_limit;
-	ifs >> vertival_sync_enabled;
-	ifs >> antialiasing_level;
-  }
-  ifs.close();
+	if (ifs.is_open()) 
+	{
+		std::getline(ifs, title);
+		ifs >> window_bounds.width >> window_bounds.height;
+		ifs >> fullscreen;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
+		ifs >> framerate_limit;
+		ifs >> vertival_sync_enabled;
+		ifs >> antialiasing_level;
+	}
+	ifs.close();
 
   //Wpisywanie do pliku config.ini zmian i resetowanie aplikacji w celu wczytaniu tych zmian z pliku
   if (buttons["SCREEN"]->isPressed()) 

@@ -16,6 +16,68 @@ WinningState_single::WinningState_single(sf::RenderWindow& window, std::stack<st
 	logo.setString(std::to_string(roznica/1000));
 	logo.setCharacterSize(50);
 	logo.setPosition((window.getSize().x / 2) - 50, 20);
+
+	std::ifstream file("config/score.ini");
+	std::string linia;
+
+	for (int i = 0; i < hardLines; i++)
+	{
+		std::getline(file, linia);
+		hardTimes[i] = std::stoi(linia);
+	}
+
+	if (roznica < hardTimes[0])
+	{
+		hardTimes[4] = hardTimes[3];
+		hardTimes[3] = hardTimes[2];
+		hardTimes[2] = hardTimes[1];
+		hardTimes[1] = hardTimes[0];
+		hardTimes[0] = roznica;
+	}
+	else
+	{
+		if (roznica < hardTimes[1])
+		{
+			hardTimes[4] = hardTimes[3];
+			hardTimes[3] = hardTimes[2];
+			hardTimes[2] = hardTimes[1];
+			hardTimes[1] = roznica;
+		}
+		else
+		{
+			if (roznica < hardTimes[2])
+			{
+				hardTimes[4] = hardTimes[3];
+				hardTimes[3] = hardTimes[2];
+				hardTimes[2] = roznica;
+			}
+			else
+			{
+				if (roznica < hardTimes[3])
+				{
+					hardTimes[4] = hardTimes[3];
+					hardTimes[3] = roznica;
+				}
+				else
+				{
+					if (roznica < hardTimes[4])
+					{
+						hardTimes[4] = roznica;
+					}
+				}
+
+			}
+		}
+	}
+	std::ofstream ofs("config/score.ini");
+	if (ofs.is_open())
+	{
+		for (int i = 0; i < hardLines; i++)
+		{
+			ofs << std::to_string(hardTimes[i]) <<"\n";
+		}
+	}
+	ofs.close();
 }
 
 WinningState_single::~WinningState_single()

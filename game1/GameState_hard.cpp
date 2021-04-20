@@ -164,7 +164,7 @@ void GameState_hard::update(const sf::Time dt)
 {
 	updateMousePosition();
 	updateButtons();
-	if (ptk > 25)
+	if (ptk == 2)
 	{
 		end = clock();
 		double roznica = difftime(end, start);

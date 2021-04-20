@@ -139,7 +139,7 @@ void GameState_normal::update(const sf::Time dt)
 {
 	updateMousePosition();
 	updateButtons();
-	if (ptk > 25)
+	if (ptk == 25)
 	{
 		end = clock();
 		double roznica = difftime(end, start);

@@ -136,7 +136,7 @@ void GameState_easy::update(const sf::Time dt)
 	
 	updateMousePosition();
 	updateButtons();
-	if (ptk > 24)
+	if (ptk == 25)
 	{
 		end = clock();
 		double roznica = difftime(end, start);

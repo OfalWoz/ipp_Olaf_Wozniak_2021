@@ -19,6 +19,9 @@ public:
 	void draw();
 	void handleEvent(const sf::Event& event);
 
+	int hardLines = 5;
+	int hardTimes[5];
+
 private:
 	sf::Sprite background;
 	sf::Texture backText;
