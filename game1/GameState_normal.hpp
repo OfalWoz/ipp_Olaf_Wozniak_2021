@@ -21,6 +21,8 @@ public:
 	void draw();
 	void handleEvent(const sf::Event& event);
 
+	int hard = 2;
+
 private:
 	float bird_vx = 5;
 	float bird_vy = 2.5;

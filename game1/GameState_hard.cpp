@@ -164,12 +164,12 @@ void GameState_hard::update(const sf::Time dt)
 {
 	updateMousePosition();
 	updateButtons();
-	if (ptk == 2)
+	if (ptk == 25)
 	{
 		end = clock();
 		double roznica = difftime(end, start);
 		printf("The time was: %f\n", roznica / CLK_TCK);
-		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica)));
+		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica, hard)));
 	}
 	if (ptk == -5)
 	{

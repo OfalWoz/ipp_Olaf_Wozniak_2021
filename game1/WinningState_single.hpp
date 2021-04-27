@@ -9,7 +9,7 @@
 class WinningState_single : public State
 {
 public:
-	WinningState_single(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states, double roznica);
+	WinningState_single(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states, double roznica, int hard);
 	~WinningState_single();
 
 	void updateMousePosition();
@@ -19,8 +19,7 @@ public:
 	void draw();
 	void handleEvent(const sf::Event& event);
 
-	int hardLines = 5;
-	int hardTimes[5];
+	int hardTimes[15] = {100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000};
 
 private:
 	sf::Sprite background;

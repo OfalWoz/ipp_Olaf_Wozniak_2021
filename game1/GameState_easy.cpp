@@ -141,7 +141,7 @@ void GameState_easy::update(const sf::Time dt)
 		end = clock();
 		double roznica = difftime(end, start);
 		printf("The time was: %f\n", roznica / CLK_TCK);
-		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica)));
+		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica, hard)));
 	}
 	if (ptk == -5)
 	{
