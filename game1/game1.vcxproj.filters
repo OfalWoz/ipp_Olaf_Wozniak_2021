@@ -57,6 +57,9 @@
     <ClCompile Include="LoseState_single.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="HightScoreState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LoseState_single.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HightScoreState.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

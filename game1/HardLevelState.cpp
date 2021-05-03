@@ -35,7 +35,7 @@ void HardLevelState::initButtons()
 
 	buttons["GAME_HARD"] = new Button(window.getSize().x / 2 - 100, 250, 150, 30, &font, "Hard", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-	buttons["GAME_MENU"] = new Button(100, window.getSize().y - 50, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["GAME_MENU"] = new Button(100, window.getSize().y - 100, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 }
 
 void HardLevelState::updateMousePosition()

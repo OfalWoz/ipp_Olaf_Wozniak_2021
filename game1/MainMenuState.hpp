@@ -3,6 +3,7 @@
 #include "SettingsState.hpp"
 #include "Button.hpp"
 #include "HardLevelState.hpp"
+#include "HightScoreState.hpp"
 #include <iostream>
 #include <sstream>
 #include <string>
