@@ -16,7 +16,6 @@ public:
 	void draw();
 	void handleEvent(const sf::Event& event);
 
-	int j = 10;
 	float hardTimes[15] = { 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000 };
 
 private:

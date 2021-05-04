@@ -5,6 +5,7 @@
 #include "GameState_easy.hpp"
 #include "GameState_normal.hpp"
 #include "GameState_hard.hpp"
+#include "GameState_multi.hpp"
 
 class HardLevelState : public State
 {
@@ -19,13 +20,13 @@ public:
 	void draw();
 	void handleEvent(const sf::Event& event);
 
-	int hard = 3;
-
 private:
 	sf::Sprite background;
 	sf::Texture backText;
 	sf::Font font;
 	sf::Text logo;
+	sf::Text Single;
+	sf::Text Multi;
 	std::map<std::string, Button*> buttons;
 	void initButtons();
 
