@@ -5,13 +5,12 @@
 #include "GameState_easy.hpp"
 #include "GameState_normal.hpp"
 #include "GameState_hard.hpp"
-#include "GameState_multi.hpp"
 
-class HardLevelState : public State
+class LoseState_single : public State
 {
 public:
-	HardLevelState(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states);
-	~HardLevelState();
+	LoseState_single(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states);
+	~LoseState_single();
 
 	void updateMousePosition();
 	void updateButtons();
@@ -25,8 +24,6 @@ private:
 	sf::Texture backText;
 	sf::Font font;
 	sf::Text logo;
-	sf::Text Single;
-	sf::Text Multi;
 	std::map<std::string, Button*> buttons;
 	void initButtons();
 

@@ -3,6 +3,7 @@
 #include "HardLevelState.hpp"
 #include "Button.hpp"
 #include "WinningState_single.hpp"
+#include "LoseState_single.hpp"
 
 class GameState_hard : public State
 {
@@ -19,6 +20,8 @@ public:
 	void renderButtons(sf::RenderTarget& target);
 	void draw();
 	void handleEvent(const sf::Event& event);
+
+	int hard = 3;
 
 private:
 	float bird_vx = 5;

@@ -1,11 +1,12 @@
 #include "SettingsState.hpp"
 
-Settings::Settings(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states) {
-  initButtons();
-  if (!backText.loadFromFile("textures/back.png")) 
-  {
-	  std::cout << "ERROR::LOADING BACKGROUND TEXTURES\n";
-  }
+Settings::Settings(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states) 
+{
+	initButtons();
+	if (!backText.loadFromFile("textures/back.png")) 
+	{
+		std::cout << "ERROR::LOADING BACKGROUND TEXTURES\n";
+	}
 	sf::Vector2f back = (sf::Vector2f)backText.getSize();
 	background.setScale(sf::Vector2f(window.getSize().x / back.x, window.getSize().y / back.y));
 	background.setTexture(backText);
@@ -14,62 +15,70 @@ Settings::Settings(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>&
 	logo.setString("Settings");
 	logo.setCharacterSize(50);
 	logo.setPosition((window.getSize().x / 2) - 100, 20);
-}
+	}
 
 Settings::~Settings() 
 {
-  auto it = buttons.begin();
-  for (it = buttons.begin(); it != buttons.end(); ++it) {
-	delete it->second;
-  }
+	auto it = buttons.begin();
+	for (it = buttons.begin(); it != buttons.end(); ++it) 
+	{
+		delete it->second;
+	}
 }
 
-void Settings::initButtons() {
+void Settings::initButtons() 
+{
 	font.loadFromFile("fonts/RoguedashSolid-BWjqx.otf");
 	std::ifstream ifs("config/window.ini");
 	std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
 	std::string title = "Game1";
 	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
 	bool fullscreen = false;
-  if (ifs.is_open()) {
-	  std::getline(ifs, title);
-	  ifs >> window_bounds.width >> window_bounds.height;
-	  ifs >> fullscreen;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
-  }
-  ifs.close();
+	if (ifs.is_open()) {
+		std::getline(ifs, title);
+		ifs >> window_bounds.width >> window_bounds.height;
+		ifs >> fullscreen;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
+	}
+	ifs.close();
 
-  //wyswietlanie odpowiedniego przycisku zaleznie od tego czy gra jest na pelnym ekranie czy w okienku
-  if (fullscreen) {
-	  buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Windowed", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
-  }
-  else {
-	  buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Full Screen", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
-  }
+	//wyswietlanie odpowiedniego przycisku zaleznie od tego czy gra jest na pelnym ekranie czy w okienku
+	if (fullscreen) 
+	{
+		buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Windowed", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	}
+	else 
+	{
+		buttons["SCREEN"] = new Button(100, 100, 200, 30, &font, "Full Screen", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	}
 
-  buttons["2560"] = new Button(100, 150, 200, 30, &font, "2560x1080", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["2560"] = new Button(100, 150, 200, 30, &font, "2560x1080", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-  buttons["1920"] = new Button(100, 200, 200, 30, &font, "1920x1080", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["1920"] = new Button(100, 200, 200, 30, &font, "1920x1080", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-  buttons["1600"] = new Button(100, 250, 200, 30, &font, "1600x900", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["1600"] = new Button(100, 250, 200, 30, &font, "1600x900", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-  buttons["720"] = new Button(100, 300, 200, 30, &font, "1280x720", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["720"] = new Button(100, 300, 200, 30, &font, "1280x720", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-  buttons["GAME_MENU"] = new Button(100, window.getSize().y - 50, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["GAME_MENU"] = new Button(100, window.getSize().y - 100, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 }
 
-void Settings::updateMousePosition() {
+void Settings::updateMousePosition() 
+{
 	mousePosScreen = sf::Mouse::getPosition();
 	mousePosWindow = sf::Mouse::getPosition(window);
 	mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 }
 
-void Settings::updateButtons() {
-  for (auto& it : buttons) {
+void Settings::updateButtons() 
+{
+  for (auto& it : buttons) 
+  {
 	it.second->update(mousePosView);
   }
 }
 
-void Settings::update(const sf::Time dt) {
+void Settings::update(const sf::Time dt) 
+{
 	updateMousePosition();
 	updateButtons();
 	std::ifstream ifs("config/window.ini");
@@ -80,15 +89,16 @@ void Settings::update(const sf::Time dt) {
 	unsigned int framerate_limit = 120;
 	bool vertival_sync_enabled = false;
 	unsigned antialiasing_level = 0;
-  if (ifs.is_open()) {
-	std::getline(ifs, title);
-	ifs >> window_bounds.width >> window_bounds.height;
-	ifs >> fullscreen;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
-	ifs >> framerate_limit;
-	ifs >> vertival_sync_enabled;
-	ifs >> antialiasing_level;
-  }
-  ifs.close();
+	if (ifs.is_open()) 
+	{
+		std::getline(ifs, title);
+		ifs >> window_bounds.width >> window_bounds.height;
+		ifs >> fullscreen;                                      //0 - to jest tryb okienkowy, 1 - fullscreen
+		ifs >> framerate_limit;
+		ifs >> vertival_sync_enabled;
+		ifs >> antialiasing_level;
+	}
+	ifs.close();
 
   //Wpisywanie do pliku config.ini zmian i resetowanie aplikacji w celu wczytaniu tych zmian z pliku
   if (buttons["SCREEN"]->isPressed()) 
@@ -207,21 +217,25 @@ void Settings::update(const sf::Time dt) {
   }
 }
 
-void Settings::renderButtons(sf::RenderTarget& target) {
-  for (auto& it : buttons) 
-  {
-	it.second->render(target);
-  }
+void Settings::renderButtons(sf::RenderTarget& target) 
+{
+	for (auto& it : buttons) 
+	{
+		it.second->render(target);
+	}
 }
 
-void Settings::draw() {
-  window.draw(background);
-  window.draw(logo);
-  renderButtons(window);
+void Settings::draw() 
+{
+	window.draw(background);
+	window.draw(logo);
+	renderButtons(window);
 }
 
-void Settings::handleEvent(const sf::Event& event) {
-  if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-	states.pop();
-  }
+void Settings::handleEvent(const sf::Event& event) 
+{
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) 
+	{
+		states.pop();
+	}
 }

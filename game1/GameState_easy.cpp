@@ -136,18 +136,22 @@ void GameState_easy::update(const sf::Time dt)
 	
 	updateMousePosition();
 	updateButtons();
-	if (ptk < 25) 
-	{
-		updatePiorko();
-		updateBird();
-		updateRock(dt);
-	}
-	else
+	if (ptk == 25)
 	{
 		end = clock();
 		double roznica = difftime(end, start);
 		printf("The time was: %f\n", roznica / CLK_TCK);
-		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica)));
+		states.push(std::shared_ptr<State>(new WinningState_single(window, states, roznica, hard)));
+	}
+	if (ptk == -5)
+	{
+		states.push(std::shared_ptr<State>(new LoseState_single(window, states)));
+	}
+	else
+	{
+		updatePiorko();
+		updateBird();
+		updateRock(dt);
 	}
 }
 
