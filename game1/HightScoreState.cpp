@@ -3,7 +3,7 @@
 HightScoreState::HightScoreState(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states)
 {
 	initButtons();
-	font.loadFromFile("fonts/RoguedashSolid-BWjqx.otf");
+	font.loadFromFile("fonts/MiniKongo.ttf");
 	if (!backText.loadFromFile("textures/back.png"))
 	{
 		std::cout << "ERROR::LOADING BACKGROUND TEXTURES\n";
@@ -14,8 +14,8 @@ HightScoreState::HightScoreState(sf::RenderWindow& window, std::stack<std::share
 
 	logo.setFont(font);
 	logo.setString("Hight Scores");
-	logo.setCharacterSize(50);
-	logo.setPosition((window.getSize().x / 2) - 100, 20);
+	logo.setCharacterSize(40);
+	logo.setPosition((window.getSize().x / 2) - 170, 20);
 	
 	std::ifstream file("config/score.ini");
 	std::string linia;
@@ -92,17 +92,17 @@ void HightScoreState::initButtons()
 void HightScoreState::fonts()
 {
 	score1.setFont(font);
-	score1.setCharacterSize(30);
-	score1.setString("Best for Hard:\n1. "+std::to_string(hardTimes[0] / 1000)+", 2. " + std::to_string(hardTimes[1] / 1000) + ", 3. " + std::to_string(hardTimes[2] / 1000) + ", 4. " + std::to_string(hardTimes[3] / 1000) + ", 5. " + std::to_string(hardTimes[4] / 1000));
+	score1.setCharacterSize(20);
+	score1.setString("Best for Hard:\n1. "+std::to_string(hardTimes[0] / 1000)+"s, 2. " + std::to_string(hardTimes[1] / 1000) + "s, 3. " + std::to_string(hardTimes[2] / 1000) + "s, 4. " + std::to_string(hardTimes[3] / 1000) + "s, 5. " + std::to_string(hardTimes[4] / 1000) + "s");
 	score1.setPosition(100, 100);
 
 	score2.setFont(font);
-	score2.setCharacterSize(30);
-	score2.setString("Best for Normal:\n1. " + std::to_string(hardTimes[5] / 1000) + ", 2. " + std::to_string(hardTimes[6] / 1000) + ", 3. " + std::to_string(hardTimes[7] / 1000) + ", 4. " + std::to_string(hardTimes[8] / 1000) + ", 5. " + std::to_string(hardTimes[9] / 1000));
+	score2.setCharacterSize(20);
+	score2.setString("Best for Normal:\n1. " + std::to_string(hardTimes[5] / 1000) + "s, 2. " + std::to_string(hardTimes[6] / 1000) + "s, 3. " + std::to_string(hardTimes[7] / 1000) + "s, 4. " + std::to_string(hardTimes[8] / 1000) + "s, 5. " + std::to_string(hardTimes[9] / 1000) + "s");
 	score2.setPosition(100, 200);
 
 	score3.setFont(font);
-	score3.setCharacterSize(30);
-	score3.setString("Best for Easy:\n1. " + std::to_string(hardTimes[10] / 1000) + ", 2. " + std::to_string(hardTimes[11] / 1000) + ", 3. " + std::to_string(hardTimes[12] / 1000) + ", 4. " + std::to_string(hardTimes[13] / 1000) + ", 5. " + std::to_string(hardTimes[14] / 1000));
+	score3.setCharacterSize(20);
+	score3.setString("Best for Easy:\n1. " + std::to_string(hardTimes[10] / 1000) + "s, 2. " + std::to_string(hardTimes[11] / 1000) + "s, 3. " + std::to_string(hardTimes[12] / 1000) + "s, 4. " + std::to_string(hardTimes[13] / 1000) + "s, 5. " + std::to_string(hardTimes[14] / 1000) + "s");
 	score3.setPosition(100, 300);
 }

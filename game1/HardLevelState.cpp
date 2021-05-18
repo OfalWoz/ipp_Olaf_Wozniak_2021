@@ -2,7 +2,7 @@
 
 HardLevelState::HardLevelState(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states)
 {
-	font.loadFromFile("fonts/RoguedashSolid-BWjqx.otf");
+	font.loadFromFile("fonts/MiniKongo.ttf");
 	initButtons();
 	if (!backText.loadFromFile("textures/back.png"))
 	{
@@ -14,18 +14,18 @@ HardLevelState::HardLevelState(sf::RenderWindow& window, std::stack<std::shared_
 
 	logo.setFont(font);
 	logo.setString("Choose level");
-	logo.setCharacterSize(50);
-	logo.setPosition((window.getSize().x / 2) - 120, 20);
+	logo.setCharacterSize(40);
+	logo.setPosition((window.getSize().x / 2) - 170, 20);
 
 	Single.setFont(font);
 	Single.setString("Singleplayer");
-	Single.setCharacterSize(40);
-	Single.setPosition((window.getSize().x / 2) + 80, 130);
+	Single.setCharacterSize(30);
+	Single.setPosition((window.getSize().x / 2) + 50, 130);
 
 	Multi.setFont(font);
 	Multi.setString("Multiplayer");
-	Multi.setCharacterSize(40);
-	Multi.setPosition((window.getSize().x / 2) - 320, 130);
+	Multi.setCharacterSize(30);
+	Multi.setPosition((window.getSize().x / 2) - 340, 130);
 }
 
 HardLevelState::~HardLevelState()
@@ -45,7 +45,11 @@ void HardLevelState::initButtons()
 
 	buttons["GAME_HARD"] = new Button(window.getSize().x / 2 + 100, 300, 150, 30, &font, "Hard", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
-	buttons["GAME_MULTI"] = new Button(window.getSize().x / 2 - 300, 250, 150, 30, &font, "Normal", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+	buttons["GAME_MULTI_EASY"] = new Button(window.getSize().x / 2 - 300, 200, 150, 30, &font, "Easy", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+
+	buttons["GAME_MULTI_NORMAL"] = new Button(window.getSize().x / 2 - 300, 250, 150, 30, &font, "Normal", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
+
+	buttons["GAME_MULTI_HARD"] = new Button(window.getSize().x / 2 - 300, 300, 150, 30, &font, "Hard", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 
 	buttons["GAME_MENU"] = new Button(100, window.getSize().y - 100, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 }
@@ -81,9 +85,20 @@ void HardLevelState::update(const sf::Time dt)
 	{
 		states.push(std::shared_ptr<State>(new GameState_hard(window, states)));
 	}
-	if (buttons["GAME_MULTI"]->isPressed())
+	if (buttons["GAME_MULTI_EASY"]->isPressed())
 	{
-		states.push(std::shared_ptr<State>(new GameState_multi(window, states)));
+		int hard = 0;
+		states.push(std::shared_ptr<State>(new GameState_multi(window, states, hard)));
+	}
+	if (buttons["GAME_MULTI_NORMAL"]->isPressed())
+	{
+		int hard = 1;
+		states.push(std::shared_ptr<State>(new GameState_multi(window, states, hard)));
+	}
+	if (buttons["GAME_MULTI_HARD"]->isPressed())
+	{
+		int hard = 2;
+		states.push(std::shared_ptr<State>(new GameState_multi(window, states, hard)));
 	}
 	if (buttons["GAME_MENU"]->isPressed()) 
 	{

@@ -63,6 +63,9 @@
     <ClCompile Include="GameState_multi.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="WinningState_multi.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.hpp">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameState_multi.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinningState_multi.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

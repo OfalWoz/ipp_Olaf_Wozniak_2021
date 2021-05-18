@@ -3,7 +3,7 @@
 WinningState_single::WinningState_single(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states, double roznica, int hard) : State(window, states)
 {
 	initButtons();
-	font.loadFromFile("fonts/arial.ttf");
+	font.loadFromFile("fonts/MiniKongo.ttf");
 	if (!backText.loadFromFile("textures/back.png"))
 	{
 		std::cout << "ERROR::LOADING BACKGROUND TEXTURES\n";
@@ -13,9 +13,14 @@ WinningState_single::WinningState_single(sf::RenderWindow& window, std::stack<st
 	background.setTexture(backText);
 
 	logo.setFont(font);
-	logo.setString(std::to_string(roznica/1000));
+	logo.setString("Your Score");
 	logo.setCharacterSize(50);
-	logo.setPosition((window.getSize().x / 2) - 50, 20);
+	logo.setPosition((window.getSize().x / 2) - 170, 20);
+
+	wynik.setFont(font);
+	wynik.setString(std::to_string(roznica / 1000) + "s");
+	wynik.setCharacterSize(40);
+	wynik.setPosition((window.getSize().x / 2) - 150, 70);
 
 	std::ifstream file("config/score.ini");
 	std::string linia;
@@ -179,34 +184,53 @@ WinningState_single::WinningState_single(sf::RenderWindow& window, std::stack<st
 
 WinningState_single::~WinningState_single()
 {
+	auto it = buttons.begin();
+	for (it = buttons.begin(); it != buttons.end(); ++it)
+	{
+		delete it->second;
+	}
 }
 
 void WinningState_single::updateMousePosition()
 {
+	mousePosScreen = sf::Mouse::getPosition();
+	mousePosWindow = sf::Mouse::getPosition(window);
+	mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 }
 
 void WinningState_single::updateButtons()
 {
+	for (auto& it : buttons)
+	{
+		it.second->update(mousePosView);
+	}
 }
 
 void WinningState_single::update(const sf::Time dt)
 {
+	updateMousePosition();
+	updateButtons();
 }
 
 void WinningState_single::renderButtons(sf::RenderTarget& target)
 {
+	for (auto& it : buttons)
+	{
+		it.second->render(target);
+	}
 }
 
 void WinningState_single::draw()
 {
 	window.draw(background);
 	window.draw(logo);
+	window.draw(wynik);
 	renderButtons(window);
 }
 
 void WinningState_single::handleEvent(const sf::Event& event)
 {
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape || buttons["GAME_MENU"]->isPressed())
 	{
 		states.push(std::shared_ptr<State>(new MainMenuState(window, states)));
 	}
@@ -214,4 +238,5 @@ void WinningState_single::handleEvent(const sf::Event& event)
 
 void WinningState_single::initButtons()
 {
+	buttons["GAME_MENU"] = new Button(100, window.getSize().y - 100, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 }

@@ -6,11 +6,11 @@
 #include "GameState_normal.hpp"
 #include "GameState_hard.hpp"
 
-class WinningState_single : public State
+class WinningState_multi : public State
 {
 public:
-	WinningState_single(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states, double roznica, int hard);
-	~WinningState_single();
+	WinningState_multi(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states, int who);
+	~WinningState_multi();
 
 	void updateMousePosition();
 	void updateButtons();
@@ -19,14 +19,11 @@ public:
 	void draw();
 	void handleEvent(const sf::Event& event);
 
-	int hardTimes[15] = {100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000};
-
 private:
 	sf::Sprite background;
 	sf::Texture backText;
 	sf::Font font;
 	sf::Text logo;
-	sf::Text wynik;
 	std::map<std::string, Button*> buttons;
 	void initButtons();
 
@@ -34,3 +31,4 @@ private:
 	sf::Vector2i mousePosWindow;
 	sf::Vector2f mousePosView;
 };
+

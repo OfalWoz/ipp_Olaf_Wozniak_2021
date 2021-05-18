@@ -2,7 +2,7 @@
 
 GameState_easy::GameState_easy(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states) 
 {
-	font.loadFromFile("fonts/arial.ttf");
+	font.loadFromFile("fonts/MiniKongo.ttf");
 	initButtons();
 	if (!birdText.loadFromFile("textures/redbird-upflap.png"))
 	{

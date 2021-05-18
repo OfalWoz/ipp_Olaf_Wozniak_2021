@@ -13,9 +13,9 @@ Settings::Settings(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>&
 
 	logo.setFont(font);
 	logo.setString("Settings");
-	logo.setCharacterSize(50);
+	logo.setCharacterSize(40);
 	logo.setPosition((window.getSize().x / 2) - 100, 20);
-	}
+}
 
 Settings::~Settings() 
 {
@@ -28,7 +28,7 @@ Settings::~Settings()
 
 void Settings::initButtons() 
 {
-	font.loadFromFile("fonts/RoguedashSolid-BWjqx.otf");
+	font.loadFromFile("fonts/MiniKongo.ttf");
 	std::ifstream ifs("config/window.ini");
 	std::vector<sf::VideoMode> videoModes = sf::VideoMode::getFullscreenModes();
 	std::string title = "Game1";

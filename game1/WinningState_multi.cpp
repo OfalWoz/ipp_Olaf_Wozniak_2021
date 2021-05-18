@@ -1,6 +1,6 @@
-#include "LoseState_single.hpp"
+#include "WinningState_multi.hpp"
 
-LoseState_single::LoseState_single(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states) : State(window, states)
+WinningState_multi::WinningState_multi(sf::RenderWindow& window, std::stack<std::shared_ptr<State>>& states, int who) : State(window, states)
 {
 	initButtons();
 	font.loadFromFile("fonts/MiniKongo.ttf");
@@ -13,12 +13,19 @@ LoseState_single::LoseState_single(sf::RenderWindow& window, std::stack<std::sha
 	background.setTexture(backText);
 
 	logo.setFont(font);
-	logo.setString("Game Over");
+	if (who == 1)
+	{
+		logo.setString("First Player Win!");
+	}
+	if (who == 2)
+	{
+		logo.setString("Second Player Win!");
+	}
 	logo.setCharacterSize(50);
 	logo.setPosition((window.getSize().x / 2) - 170, 20);
 }
 
-LoseState_single::~LoseState_single()
+WinningState_multi::~WinningState_multi()
 {
 	auto it = buttons.begin();
 	for (it = buttons.begin(); it != buttons.end(); ++it)
@@ -27,14 +34,14 @@ LoseState_single::~LoseState_single()
 	}
 }
 
-void LoseState_single::updateMousePosition()
+void WinningState_multi::updateMousePosition()
 {
 	mousePosScreen = sf::Mouse::getPosition();
 	mousePosWindow = sf::Mouse::getPosition(window);
 	mousePosView = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 }
 
-void LoseState_single::updateButtons()
+void WinningState_multi::updateButtons()
 {
 	for (auto& it : buttons)
 	{
@@ -42,13 +49,13 @@ void LoseState_single::updateButtons()
 	}
 }
 
-void LoseState_single::update(const sf::Time dt)
+void WinningState_multi::update(const sf::Time dt)
 {
 	updateMousePosition();
 	updateButtons();
 }
 
-void LoseState_single::renderButtons(sf::RenderTarget& target)
+void WinningState_multi::renderButtons(sf::RenderTarget& target)
 {
 	for (auto& it : buttons)
 	{
@@ -56,14 +63,14 @@ void LoseState_single::renderButtons(sf::RenderTarget& target)
 	}
 }
 
-void LoseState_single::draw()
+void WinningState_multi::draw()
 {
 	window.draw(background);
 	window.draw(logo);
 	renderButtons(window);
 }
 
-void LoseState_single::handleEvent(const sf::Event& event)
+void WinningState_multi::handleEvent(const sf::Event& event)
 {
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape || buttons["GAME_MENU"]->isPressed())
 	{
@@ -71,7 +78,7 @@ void LoseState_single::handleEvent(const sf::Event& event)
 	}
 }
 
-void LoseState_single::initButtons()
+void WinningState_multi::initButtons()
 {
 	buttons["GAME_MENU"] = new Button(100, window.getSize().y - 100, 200, 30, &font, "Back", sf::Color::White, sf::Color::Cyan, sf::Color::Cyan);
 }

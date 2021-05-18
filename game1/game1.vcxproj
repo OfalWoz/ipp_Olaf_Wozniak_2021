@@ -176,6 +176,7 @@
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="SettingsState.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="WinningState_multi.cpp" />
     <ClCompile Include="WinningState_single.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +192,7 @@
     <ClInclude Include="MainMenuState.hpp" />
     <ClInclude Include="SettingsState.hpp" />
     <ClInclude Include="State.hpp" />
+    <ClInclude Include="WinningState_multi.hpp" />
     <ClInclude Include="WinningState_single.hpp" />
   </ItemGroup>
   <ItemGroup>
